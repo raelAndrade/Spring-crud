@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro Usuário</title>
+</head>
+<body>
+	Cadastro Usuário
+	<br />
+	<br />
+	<br />
+	<form method="post" action="salvaUsuario" th:object="${userObj}">
+		<label>ID</label><br />
+		<input name="id" th:field="*{id}" readonly="readonly"/> <br /> <br />
+		<label>Nome:</label> 
+		<input name="nome" th:field="*{nome}" /> <br /> <br />
+		<label>CPF:</label> 
+		<input name="cpf" th:field="*{cpf}" /> <br /><br />
+		<label>Data de nascimento:</label> 
+		<input name="dataNascimento" th:field="*{dataNascimento}"/> <br />
+		<button type="submit" value="Salvar">SALVAR</button>
+	</form>
+	
+	<a href="/listaUsuario"></a>
+	
+	<table>
+		<tr th:each="user : ${usuarios}">
+			<td th:text="${user.id}">
+			<td th:text="${user.nome}"></td>
+			<td th:text="${user.cpf}"></td>
+			<td th:text="${#dates.format(user.dataNascimento, 'dd/MM/yyyy')}"></td>
+			<td><a th:href="@{/usuario/editaUsuario/{id}(id=${user.id})}">Editar</a></td>
+			<td><a th:href="@{/usuario/removeUsuario/{id}(id=${user.id})}">Excluir</a></td>
+		</tr>
+	</table>
+	
+</body>
+</html>
